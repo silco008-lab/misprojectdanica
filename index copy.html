@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Danica Silcox | Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF69B4;
+            --secondary-pink: #FFB6C1;
+            --light-pink: #FFF0F5;
+            --dark-pink: #DB7093;
+            --text-color: #4A4A4A;
+            --background-color: #FFF5F8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Improve touch targets on mobile */
+        a, button {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .profile-section {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--light-pink) 0%, var(--secondary-pink) 100%);
+        }
+
+        .profile-image {
+            width: 400px;
+            height: 400px;
+            border-radius: 15px;
+            object-fit: contain;
+            border: 8px solid white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.02);
+        }
+
+        .floating-element {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .book {
+            width: 40px;
+            height: 50px;
+            background: var(--primary-pink);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 85% 100%, 85% 15%, 0 15%);
+        }
+
+        .music-note {
+            font-family: Arial;
+            color: var(--primary-pink);
+            font-size: 2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .tennis-border {
+            border: 10px solid transparent;
+            border-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" fill="none" stroke="%23FFB6C1" stroke-width="10"/><path d="M5,50 C5,25 95,75 95,50 C95,75 5,25 5,50" fill="none" stroke="%23FFB6C1" stroke-width="5"/></svg>') 30 stretch;
+            padding: 20px;
+        }
+
+        .piano-border {
+            border: 10px solid transparent;
+            border-image: url('data:image/svg+xml,<svg width="100" height="20" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="20" fill="white"/><rect x="0" y="0" width="10" height="20" fill="black"/><rect x="20" y="0" width="10" height="20" fill="black"/><rect x="40" y="0" width="10" height="20" fill="black"/><rect x="60" y="0" width="10" height="20" fill="black"/><rect x="80" y="0" width="10" height="20" fill="black"/></svg>') 30 stretch;
+            padding: 20px;
+        }
+
+        .interest-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Remove extra spacing specifically for piano gallery images */
+        .piano-gallery {
+            display: flex;
+            gap: 0;
+            margin: 0;
+        }
+        .piano-gallery .interest-image {
+            margin: 0;
+            display: block;
+            height: auto;
+            width: 50%;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Remove spacing between tennis photos */
+        .tennis-gallery {
+            display: flex;
+            gap: 0;
+            margin: 0;
+        }
+        .tennis-gallery .interest-image {
+            margin: 0;
+            width: 50%;
+            display: block;
+        }
+
+        /* Reduce extra bottom padding inside the piano card */
+        .interest-card.piano-border {
+            padding-bottom: 0.5rem;
+        }
+        
+        .profile-frame {
+            position: relative;
+        }
+        
+        .profile-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: 
+                repeating-conic-gradient(
+                    from 0deg,
+                    var(--dark-pink) 0deg 30deg,
+                    transparent 30deg 60deg
+                );
+            border-radius: 50%;
+            z-index: 1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .cheetah-accent {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-image: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="15" fill="%23FF69B4" opacity="0.2"/></svg>'),
+                            url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="10" fill="%23DB7093" opacity="0.15"/></svg>');
+            opacity: 0.1;
+        }
+
+        .tennis-decoration {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="%23FFE135" stroke="%23fff" stroke-width="2"/><path d="M2,20 C2,10 38,30 38,20 C38,30 2,10 2,20" fill="none" stroke="%23fff" stroke-width="2"/></svg>');
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .racquet-decoration {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="20" rx="15" ry="20" fill="none" stroke="%23DB7093" stroke-width="2"/><line x1="30" y1="40" x2="30" y2="60" stroke="%23DB7093" stroke-width="2"/></svg>');
+            animation: swing 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .welcome-heading {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark-pink);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30" fill="%23FFB6C1" opacity="0.1"/><circle cx="50" cy="50" r="20" fill="%23DB7093" opacity="0.1"/></svg>'),
+                url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M30,10 Q45,45 30,50 T30,90" fill="none" stroke="%23FF69B4" stroke-width="2" opacity="0.1"/></svg>');
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .fun-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .lipstick {
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="20" width="10" height="15" fill="%23FF1493"/><path d="M15,20 L25,20 L20,10 Z" fill="%23FF69B4"/></svg>');
+        }
+
+        .cake {
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="20" width="20" height="15" fill="%23FFB6C1"/><circle cx="20" cy="17" r="3" fill="%23FF69B4"/><rect x="8" y="15" width="24" height="5" fill="%23FFC0CB"/></svg>');
+        }
+
+        .strawberry {
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M20,10 L25,15 L15,15 Z" fill="%2390EE90"/><path d="M15,15 Q20,40 25,15 Z" fill="%23FF0000"/></svg>');
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,182,193,0.1);
+            pointer-events: none;
+        }
+
+        .video-message {
+            text-align: center;
+            padding: 1rem;
+            color: var(--dark-pink);
+            font-style: italic;
+        }
+
+        .welcome-video {
+            max-width: 600px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .interests-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+
+        .interest-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .interest-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stories-section {
+            background: var(--light-pink);
+            padding: 4rem 2rem;
+        }
+
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .halloween-section {
+            position: relative;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--secondary-pink) 0%, var(--light-pink) 100%);
+        }
+
+        .pumpkin-decoration {
+            position: absolute;
+            width: 100px;
+            height: auto;
+        }
+
+        nav {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            list-style: none;
+            margin-right: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.4s;
+            box-shadow: 0 4px 15px rgba(0, 206, 201, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 206, 201, 0.3);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                gap: 1rem;
+                margin-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tennis ball and racquet decorations -->
+    <div class="tennis-decoration" style="top: 10%; left: 5%"></div>
+    <div class="tennis-decoration" style="top: 30%; right: 8%"></div>
+    <div class="tennis-decoration" style="bottom: 15%; left: 12%"></div>
+    <div class="racquet-decoration" style="top: 20%; right: 15%"></div>
+    <div class="racquet-decoration" style="bottom: 25%; left: 8%"></div>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="hobbies.html">My Hobbies</a></li>
+                <li><a href="discover.html">Discover</a></li>
+                <li><a href="career.html">Career Interests</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </nav>
+
+        <section id="home" class="profile-section">
+            <!-- Decorative elements -->
+            <div class="decorative-pattern"></div>
+            <div class="fun-icon lipstick" style="top: 15%; right: 15%;"></div>
+            <div class="fun-icon cake" style="bottom: 20%; left: 10%;"></div>
+            <div class="fun-icon strawberry" style="top: 25%; left: 20%;"></div>
+            <div class="fun-icon lipstick" style="bottom: 30%; right: 25%;"></div>
+            <div class="fun-icon cake" style="top: 40%; right: 10%;"></div>
+            <div class="fun-icon strawberry" style="bottom: 15%; left: 30%;"></div>
+
+            <div class="floating-element book" style="top: 20%; left: 15%;"></div>
+            <div class="floating-element book" style="top: 30%; right: 20%;"></div>
+            <div class="floating-element music-note" style="top: 25%; left: 25%;">♪</div>
+            <div class="floating-element music-note" style="top: 40%; right: 25%;">♫</div>
+            <div class="floating-element music-note" style="top: 15%; right: 35%;">♩</div>
+            <img src="Images/IMG_2891 (2).jpg" alt="Danica Silcox" class="profile-image">
+            <h1 class="welcome-heading">Welcome to My Website 😊😊</h1>
+            <p class="subtitle">by Danica Silcox</p>
+            
+            <div class="video-container">
+                <div class="welcome-video" aria-hidden="false">
+                    <!-- Simple animated welcome 'video' built with CSS and SVG so it displays instead of a black video element -->
+                    <svg class="welcome-animation" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <linearGradient id="g1" x1="0%" x2="100%">
+                                <stop offset="0%" stop-color="#FFB6C1" />
+                                <stop offset="50%" stop-color="#FF69B4" />
+                                <stop offset="100%" stop-color="#DB7093" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="600" height="200" fill="url(#g1)"></rect>
+                        <g class="pulses" fill="rgba(255,255,255,0.08)">
+                            <circle cx="100" cy="100" r="40"></circle>
+                            <circle cx="300" cy="100" r="30"></circle>
+                            <circle cx="500" cy="100" r="45"></circle>
+                        </g>
+                        <text x="50%" y="55%" text-anchor="middle" font-size="30" fill="white" font-weight="700">Welcome 😊😊</text>
+                    </svg>
+                </div>
+
+                <div class="welcome-controls" style="text-align:center; margin-top:12px;">
+                    <button id="welcomePlay" class="play-button"><i class="fas fa-play"></i> Play Welcome</button>
+                    <button id="welcomeAuto" class="play-button" style="margin-left:8px;"><i class="fas fa-bolt"></i> Try Auto-Play</button>
+                </div>
+
+                <p class="video-message">Welcome — click "Play Welcome" if you don't hear audio automatically.</p>
+            </div>
+
+            <style>
+            .welcome-video { max-width: 700px; margin: 1.25rem auto; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+            .welcome-animation { width: 100%; height: 200px; display:block; }
+            .welcome-animation .pulses circle { transform-origin: center; animation: pulseAnim 3s ease-in-out infinite; }
+            .welcome-animation .pulses circle:nth-child(1) { animation-delay: 0s; }
+            .welcome-animation .pulses circle:nth-child(2) { animation-delay: 0.5s; }
+            .welcome-animation .pulses circle:nth-child(3) { animation-delay: 1s; }
+            @keyframes pulseAnim { 0% { transform: scale(1); opacity: 0.9 } 50% { transform: scale(1.25); opacity: 0.5 } 100% { transform: scale(1); opacity: 0.9 } }
+
+            .play-button { background: var(--primary-pink); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 22px; font-size: 1rem; cursor: pointer; }
+            .play-button:hover { transform: translateY(-2px); }
+            </style>
+
+            <script>
+            // Web Speech API welcome voice — speak ONLY with a female-like voice when the user clicks.
+            function speakWelcome() {
+                const text = "Welcome to my website. I am so glad you all could make it. Please enjoy. My name is Danica Silcox and I am a sophomore at UMD. I have worked over the last couple months to create a website that really shows my strengths and who I am as a person. I am so excited for you all to check it out.";
+                if (!('speechSynthesis' in window)) {
+                    alert('Sorry, your browser does not support text-to-speech.');
+                    return;
+                }
+
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.rate = 1;
+                utter.pitch = 1.25;
+
+                // Prefer a female voice when available. If no female-like voice is found, do NOT speak (to avoid a male voice).
+                const setVoice = () => {
+                    const voices = speechSynthesis.getVoices();
+                    if (voices && voices.length) {
+                        const femaleRegex = /female|woman|samantha|zira|victoria|audrey|anna|alloy|google|emma|olivia|zira|linda|sara|amy/i;
+                        const preferred = voices.find(v => femaleRegex.test(v.name)) || voices.find(v => femaleRegex.test(v.lang));
+                        if (preferred) utter.voice = preferred;
+                    }
+                };
+
+                setVoice();
+                // Some browsers load voices asynchronously — try to set the voice if voices appear later.
+                window.speechSynthesis.onvoiceschanged = () => {
+                    setVoice();
+                    // only speak automatically here if a female voice became available
+                    if (!utter.voice) return;
+                    document.querySelector('.welcome-animation').classList.add('playing');
+                    utter.onend = () => { document.querySelector('.welcome-animation').classList.remove('playing'); };
+                    speechSynthesis.cancel();
+                    speechSynthesis.speak(utter);
+                };
+
+                // If no female voice is selected now, do not speak. This prevents a male fallback voice from playing.
+                if (!utter.voice) return;
+
+                // start animation and speak
+                document.querySelector('.welcome-animation').classList.add('playing');
+                utter.onend = () => { document.querySelector('.welcome-animation').classList.remove('playing'); };
+                speechSynthesis.cancel();
+                speechSynthesis.speak(utter);
+            }
+
+            document.getElementById('welcomePlay').addEventListener('click', () => speakWelcome());
+            // Do not auto-speak on page load. The user must click 'Play Welcome' to hear the female voice.
+            </script>
+        </section>
+
+        <section id="interests" class="interests-section">
+            <div class="interest-card tennis-border">
+                <div class="content-flex">
+                    <div class="text-section">
+                        <h2>Tennis</h2>
+                        <p class="casual-text">Tennis has been a huge part of my life since middle school, and it's awesome to now be playing for UMD! I've put in countless hours of practice and hard work, which paid off when I made it to state all four years of high school. One of my proudest moments was getting third place at state during my senior year at the Nielsen Center. Tennis isn't just a sport for me - it's taught me so much about dedication, teamwork, and pushing myself to be better every day.</p>
+                        <div class="tennis-decorations">
+                            <img src="data:image/svg+xml,<svg width='30' height='30' xmlns='http://www.w3.org/2000/svg'><circle cx='15' cy='15' r='14' fill='%23FFD700' stroke='white'/><path d='M1,15 C1,8 29,22 29,15 C29,22 1,8 1,15' fill='none' stroke='white'/></svg>" class="floating-tennis-ball">
+                            <img src="data:image/svg+xml,<svg width='30' height='30' xmlns='http://www.w3.org/2000/svg'><circle cx='15' cy='15' r='14' fill='%23FFD700' stroke='white'/><path d='M1,15 C1,8 29,22 29,15 C29,22 1,8 1,15' fill='none' stroke='white'/></svg>" class="floating-tennis-ball" style="animation-delay: 0.5s">
+                        </div>
+                    </div>
+                    <div class="image-section">
+                    <img src="Images/tennis%201.JPG" alt="" class="interest-image">
+                    </div>
+                </div>
+                <div class="tennis-gallery">
+                    <img src="Images/Tennis%20%232.jpg" alt="" class="interest-image">
+                    <img src="Images/tennis%201.JPG" alt="" class="interest-image">
+                </div>
+            </div>
+
+            <style>
+            .content-flex {
+                display: flex;
+                gap: 2rem;
+                margin-bottom: 2rem;
+                align-items: center;
+            }
+            .text-section {
+                flex: 1;
+            }
+            .image-section {
+                flex: 1;
+            }
+            .casual-text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #333;
+                padding: 1rem;
+                border-left: 3px solid var(--primary-pink);
+                margin: 1rem 0;
+                background: rgba(255, 192, 203, 0.05);
+            }
+            /* Piano-specific enhancements */
+            .piano-enhanced {
+                position: relative;
+                padding: 1rem 1rem 0.5rem 1rem;
+                overflow: visible;
+            }
+            .piano-decor {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: flex;
+                gap: 8px;
+                opacity: 0.9;
+            }
+            .piano-decor svg { width: 28px; height: 28px; }
+            .formal-text {
+                font-size: 1rem;
+                color: #333;
+                margin-bottom: 0.6rem;
+            }
+            .piano-gallery { display:flex; gap:0; margin:0; }
+            .piano-gallery .interest-image { width:50%; margin:0; height:auto; display:block; border-radius:0 0 10px 10px; }
+            </style>
+
+            <div class="interest-card piano-border piano-enhanced">
+                <div class="piano-decor" aria-hidden="true">
+                    <!-- small decorative music notes -->
+                    <svg viewBox="0 0 24 24"><path fill="#DB7093" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+                    <svg viewBox="0 0 24 24"><path fill="#FF69B4" d="M9 3v12a3 3 0 1 0 2 0V6h4V3H9z"/></svg>
+                    <svg viewBox="0 0 24 24"><path fill="#FFB6C1" d="M5 13v7h2v-5h3v-2H5z"/></svg>
+                </div>
+                <img src="Images/piano.JPG" alt="" class="interest-image">
+                <h2>Piano</h2>
+                <p class="formal-text">I started piano in kindergarten and still practice regularly. Playing helps me focus and express myself — I play a mix of classical pieces and contemporary songs. I also enjoy accompanying friends at recitals and experimenting with arranging music.</p>
+                <p class="formal-text">Practice routine: I warm up with scales and arpeggios for 20–30 minutes, then work on repertoire and technical exercises. I aim for musicality and clarity — not just speed — and I record myself regularly to track progress.</p>
+                <p class="formal-text">Favorite pieces & goals: I love Debussy and Chopin, and I'm currently working on learning a Chopin nocturne and a short Rachmaninoff piece. My goal is to perform more chamber music and to write small piano arrangements for friends' recitals.</p>
+                <p class="formal-text">Community & performances: I’ve played at local community recitals and school events. I also enjoy teaching friends simple arrangements and helping with accompaniment; sharing music is one of my favorite parts of playing.</p>
+                <p class="formal-text">How I practice musically: beyond mechanics, I spend time listening deeply to recordings and analyzing how phrasing, dynamics, and pedal affect the overall shape of a piece. I keep a practice journal where I note tempo markings, troublesome passages, and small, measurable goals for each session.</p>
+                <p class="formal-text">Collaborations: I like working with singers and small ensembles — accompanying a vocalist forces me to be flexible, sensitive to breathing, and responsive to subtle tempo shifts. These collaborations have taught me accompaniment skills that I now use regularly in school performances.</p>
+                <p class="formal-text">Personal projects: lately I’ve been arranging short modern songs for solo piano and creating simple backing tracks to practice improvisation. My long-term dream is to compose a short suite for piano inspired by the seasons in Minnesota.</p>
+                <p class="formal-text">Why piano matters to me: playing is a place to process emotions, celebrate, and connect with other people. Whether I’m preparing for a recital or playing casually for friends, piano gives me a way to communicate when words are not enough.</p>
+                <div class="piano-gallery">
+                    <img src="Images/IMG_2211.jpg.JPEG" alt="" class="interest-image">
+                    <img src="Images/IMG_3743.jpg" alt="" class="interest-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal stories moved to the Hobbies page per request -->
+
+        <footer>
+            <div class="social-links">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
